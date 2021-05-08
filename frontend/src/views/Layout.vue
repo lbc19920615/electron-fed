@@ -68,6 +68,11 @@ export default {
             title: '通信',
             pageName: 'Ipc',
             params: {},
+          },
+          'subMenu_4' : {
+            title: '获取系统信息',
+            pageName: 'SystemInfo',
+            params: {},
           }
         },
         'menu_2' : {

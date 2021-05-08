@@ -8,8 +8,21 @@ const mainApi = {
   executeJS: '/api/v1/example/executeJS',
   autoLaunchEnable: '/api/v1/setting/autoLaunchEnable',
   autoLaunchDisable: '/api/v1/setting/autoLaunchDisable',
-  autoLaunchIsEnabled: '/api/v1/setting/autoLaunchIsEnabled'
+  autoLaunchIsEnabled: '/api/v1/setting/autoLaunchIsEnabled',
+  getSystemInfo: '/api/v1/example/getSystemInfo',
 }
+
+/**
+ * getSystemInfo
+ */
+export function getSystemInfo (parameter) {
+  return request({
+    url: mainApi.getSystemInfo,
+    method: 'post',
+    data: parameter
+  })
+}
+
 
 /**
  * outApi

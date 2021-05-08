@@ -43,6 +43,15 @@ class ExampleController extends BaseController {
     self.sendSuccess(data);
   }
 
+  async getSystemInfo() {
+    const self = this;
+    const { service } = this;
+    const data = {};
+    data.cpu = await service.systeminfo.getCpu();
+
+    self.sendSuccess(data);
+  }
+
   async uploadFile() {
     const self = this;
     const { ctx, service } = this;

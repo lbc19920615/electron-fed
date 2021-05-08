@@ -122,6 +122,7 @@
     "lowdb": "^1.0.0",
     "semver": "^5.4.1",
     "socket.io": "^3.0.5",
-    "socket.io-client": "^3.0.5"
+    "socket.io-client": "^3.0.5",
+    "systeminformation": "^5.6.20"
   }
 }

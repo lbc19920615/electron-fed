@@ -9,6 +9,8 @@ module.exports = app => {
   router.post('/api/v1/example/openLocalDir', controller.v1.example.openLocalDir);
   // executeJS
   router.post('/api/v1/example/executeJS', controller.v1.example.executeJS);
+  // get system info
+  router.post('/api/v1/example/getSystemInfo', controller.v1.example.getSystemInfo);
   // upload file
   router.post('/api/v1/example/uploadFile', controller.v1.example.uploadFile);
   // get ws url
