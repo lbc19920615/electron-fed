@@ -57,7 +57,7 @@ const config = {
     Linux: false,
     options: {
       provider: 'generic', // or github, s3, bintray
-      url: 'https://raw.githubusercontent.com/wallace5303/electron-egg/master/' // resource dir
+      url: 'https://raw.githubusercontent.com/lbc19920615/electron-fed/master/' // resource dir
     }
   }
 }
