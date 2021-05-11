@@ -23,14 +23,19 @@ export const constantRouterMap = [
         component: () => import('@/views/example/Ipc')
       },
       {
-        path: 'setting',
-        name: 'Setting',
-        component: () => import('@/views/Setting')
-      },
-      {
         path: 'systemInfo',
         name: 'SystemInfo',
         component: () => import('@/views/example/SystemInfo')
+      },
+      {
+        path: 'md5-wasm',
+        name: 'Md5Wasm',
+        component: () => import('@/views/example/Md5Wasm')
+      },
+      {
+        path: 'setting',
+        name: 'Setting',
+        component: () => import('@/views/Setting')
       },
     ]
   }

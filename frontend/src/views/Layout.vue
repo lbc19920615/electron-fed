@@ -73,6 +73,11 @@ export default {
             title: '获取系统信息',
             pageName: 'SystemInfo',
             params: {},
+          },
+          'subMenu_5' : {
+            title: '加载wasm',
+            pageName: 'Md5Wasm',
+            params: {},
           }
         },
         'menu_2' : {
