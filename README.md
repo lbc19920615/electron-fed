@@ -1,9 +1,5 @@
 # electron-fed 
-一个简单、快速、功能丰富的跨平台桌面软件开发框架。
-
-查看：[教程文档](https://www.yuque.com/u34495/mivcfg/xnhmms)
-
-🏆 码云最有价值开源项目
+一个简单、快速、功能丰富的跨平台桌面软件。
 
 ## 特性
 1. 直接打包成windows版、Mac版、Linux版或者以web网站运行。
@@ -17,7 +13,6 @@
 
 - 使用vue编写，经典三栏样式，可自定义
 
-![](./build/img/upload_pic.png)
 ![](./build/img/open_dir.png)
 
 ## 开始使用
