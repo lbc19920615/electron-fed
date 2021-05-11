@@ -17,7 +17,9 @@ exports.openDir = function (dir = '') {
     return false;
   }
   dir = getElectronPath(dir);
-  shell.openItem(dir);
+  // @removed on Electon8
+  // shell.openItem(dir);
+  shell.openPath(dir);
   return true;
 }
 
