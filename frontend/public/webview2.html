@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>webview2</title>
+    <link rel="stylesheet" href="./lib/tab.css">
+</head>
+<body style="margin: 0">
+<div class="page-webview" style="height: 100%;">
+<div class="etabs-tabgroup">
+    <div class="etabs-tabs"></div>
+    <div class="etabs-buttons"></div>
+</div>
+<div class="etabs-views"></div>
+</div>
+</body>
+<script src="./lib/tabs.js"></script>
+<script>
+    let tabGroup = new global.TabGroup({
+        newTab: {
+            title: "New Tab",
+        },
+    });
+
+    tabGroup.addTab({
+        title: "Google",
+        src: "http://google.com",
+    });
+
+    tabGroup.addTab({
+        title: "Electron",
+        src: "http://electron.atom.io",
+        visible: true,
+        active: true,
+        ready(context) {
+            console.log(context)
+        }
+    });
+</script>
+</html>

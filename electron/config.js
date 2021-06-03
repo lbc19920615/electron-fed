@@ -41,6 +41,7 @@ const config = {
       nodeIntegration: true,
       preload: path.join(__dirname, '../preload.js'),
       webviewTag: true,
+      nodeIntegrationInSubFrames: true
     },
     frame: false,
     titleBarStyle: 'hidden'

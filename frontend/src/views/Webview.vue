@@ -9,7 +9,6 @@
 </template>
 
 <script>
-import { TabGroup } from "../lib/tabs";
 
 export default {
   data() {
@@ -18,26 +17,7 @@ export default {
   },
   mounted() {
     console.log('mounted')
-    let tabGroup = new TabGroup({
-      newTab: {
-        title: "New Tab",
-      },
-    });
 
-    tabGroup.addTab({
-      title: "Google",
-      src: "http://google.com",
-    });
-
-    tabGroup.addTab({
-      title: "Electron",
-      src: "http://electron.atom.io",
-      visible: true,
-      active: true,
-      ready(context) {
-        console.log(context)
-      }
-    });
   }
 }
 </script>
