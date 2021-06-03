@@ -13,29 +13,36 @@
       </a-menu>
     </a-layout-sider>
     <a-layout>
-      <a-layout-sider
-        theme="light"
-        class="sub-layout-sider"
-      >
-        <a-menu class="sub-menu-item" theme="light" mode="inline" v-model="subMenuKey" :default-selected-keys="subMenuKey">
-          <a-menu-item :key="subIndex" v-for="(menuInfo, subIndex) in subMenu">
-          <router-link :to="{ name: menuInfo.pageName, params: menuInfo.params}">
-            <span>{{ menuInfo.title }}</span>
-          </router-link>
-          </a-menu-item>
-        </a-menu>
-      </a-layout-sider>
-      <a-layout-content :style="{}">
-        <div :style="{ padding: '10px', background: '#fff', minHeight: '560px' }">
-          <router-view />
-        </div>
+      <tool-bar></tool-bar>
+      <a-layout-content>
+        <a-layout>
+          <a-layout-sider
+              theme="light"
+              class="sub-layout-sider"
+          >
+            <a-menu class="sub-menu-item" theme="light" mode="inline" v-model="subMenuKey" :default-selected-keys="subMenuKey">
+              <a-menu-item :key="subIndex" v-for="(menuInfo, subIndex) in subMenu">
+                <router-link :to="{ name: menuInfo.pageName, params: menuInfo.params}">
+                  <span>{{ menuInfo.title }}</span>
+                </router-link>
+              </a-menu-item>
+            </a-menu>
+          </a-layout-sider>
+          <a-layout-content :style="{}">
+            <div :style="{ padding: '10px', background: '#fff', minHeight: '560px' }">
+              <router-view />
+            </div>
+          </a-layout-content>
+        </a-layout>
       </a-layout-content>
     </a-layout>
   </a-layout>
 </template>
 <script>
+import ToolBar from "../components/ToolBar";
 export default {
   name: 'Layout',
+  components: {ToolBar},
   data() {
     return {
       collapsed: true,
@@ -108,6 +115,7 @@ export default {
 <style lang="less" scoped>
 // 嵌套
 #components-layout-demo-responsive {
+  height: 100%;
   .logo {
     border-bottom: 1px solid #e8e8e8;
   }

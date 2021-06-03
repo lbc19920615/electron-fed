@@ -41,8 +41,8 @@ const config = {
       nodeIntegration: true,
       preload: path.join(__dirname, '../preload.js')
     },
-    //frame: false,
-    //titleBarStyle: 'hidden'
+    frame: false,
+    titleBarStyle: 'hidden'
   },
   egg: {
     title: 'electron-egg',

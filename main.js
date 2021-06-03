@@ -88,6 +88,8 @@ async function createWindow () {
     autoUpdater.checkUpdate();
   }
 
+  MAIN_WINDOW.webContents.openDevTools();
+
   return MAIN_WINDOW
 }
 
