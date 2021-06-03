@@ -15,7 +15,7 @@
     <a-layout>
       <tool-bar></tool-bar>
       <a-layout-content>
-        <a-layout>
+        <a-layout :style="{height: '100%'}">
           <a-layout-sider
               theme="light"
               class="sub-layout-sider"
@@ -29,9 +29,13 @@
               </a-menu-item>
             </a-menu>
           </a-layout-sider>
-          <a-layout-content :style="{}">
-            <div :style="{ padding: '10px', background: '#fff', minHeight: '560px' }">
-              <router-view />
+          <a-layout-content :style="{height: '100%'}">
+            <div class="app-content-container" :style="{ padding: '0', background: '#fff', height: '100%' }">
+              <keep-alive>
+<!--                <div v-if="$route.meta.keepAlive"> keepAlive: true</div>-->
+                <router-view v-if="$route.meta.keepAlive"></router-view>
+              </keep-alive>
+              <router-view v-if="!$route.meta.keepAlive"></router-view>
             </div>
           </a-layout-content>
         </a-layout>
@@ -173,33 +177,9 @@ export default {
   }
 }
 
-// #components-layout-demo-responsive .logo {
-//   height: 32px;
-//   background: rgba(139, 137, 137, 0.2);
-//   margin: 16px;
-// }
-// #components-layout-demo-responsive .menu-item .ant-menu-item {
-//   background-color: #001529;
-//   margin-top: 0px;
-//   margin-bottom: 0px;
-// }
-// #components-layout-demo-responsive .sub-menu-item .ant-menu-item {
-//   margin-top: 0px;
-//   margin-bottom: 0px;
-// }
-// #components-layout-demo-responsive .sub-menu-item .ant-menu-item::after {
-//   border-right: 3px solid #F2F2F2;
-// }
-// #components-layout-demo-responsive .sub-menu-item.ant-menu {
-//   background: #FAFAFA;
-// }
-// #components-layout-demo-responsive .sub-menu-item.ant-menu-inline {
-//   border-right: 0px solid #FAFAFA;
-// }
-// #components-layout-demo-responsive .sub-menu-item .ant-menu-item-selected {
-//   background-color:#F2F2F2;
-//   span {
-//     color: #111;
-//   }
-// }
+.app-content-container {
+  > div {
+    height: 100%;
+  }
+}
 </style>

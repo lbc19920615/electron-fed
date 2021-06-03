@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import { VueAxios } from './utils/request'
 import InjectIpc from '@/utils/injectIpc'
+import '@/styles/app.less'
 
 Vue.use(antd)
 // mount axios to `Vue.$http` and `this.$http`

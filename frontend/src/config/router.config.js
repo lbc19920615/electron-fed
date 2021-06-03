@@ -40,7 +40,10 @@ export const constantRouterMap = [
       {
         path: 'webview',
         name: 'Webview',
-        component: () => import('@/views/Webview')
+        component: () => import('@/views/Webview'),
+        meta: {
+          keepAlive: true
+        }
       },
     ]
   }
