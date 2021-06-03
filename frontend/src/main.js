@@ -5,8 +5,10 @@ import App from './App'
 import router from './router'
 import { VueAxios } from './utils/request'
 import InjectIpc from '@/utils/injectIpc'
+import store from './store'
 import '@/styles/app.less'
 
+// 全局注入Vuex
 Vue.use(antd)
 // mount axios to `Vue.$http` and `this.$http`
 Vue.use(VueAxios)
@@ -26,5 +28,6 @@ Vue.config.productionTip = false
 
 new Vue({
   router,
+  store,
   render: h => h(App)
 }).$mount('#app')

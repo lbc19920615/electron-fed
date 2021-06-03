@@ -6,6 +6,7 @@ const electronConfig = require('./electron/config')
 const storage = require('./electron/storage')
 const is = require('electron-is')
 const setTray = require('./electron/tray')
+const { setShortCut, unsetShortCut } = require('./electron/shortCut')
 
 // main window
 global.MAIN_WINDOW = null
@@ -16,7 +17,7 @@ global.CAN_QUIT = false;
 // browser view
 global.BROWSER_VIEW = null
 
-// Initialize 
+// Initialize
 setup()
 //return
 
@@ -42,12 +43,16 @@ async function initialize () {
       }
     })
   })
-  
+
   app.on('window-all-closed', function () {
     if (process.platform !== 'darwin') {
       console.log('window-all-closed quit')
       app.quit()
     }
+  })
+
+  app.on('will-quit', () => {
+    unsetShortCut()
   })
 
   // Open url with the default browser
@@ -62,6 +67,10 @@ async function initialize () {
 function createTabbedBrowserView(MAIN_WINDOW) {
   const bounds = MAIN_WINDOW.getBounds()
   const view = new BrowserView(electronConfig.get('viewsOption'))
+  view.setAutoResize({
+    width: true,
+    height: true
+  })
   MAIN_WINDOW.addBrowserView(view)
 
   const x = 80
@@ -75,24 +84,39 @@ function createTabbedBrowserView(MAIN_WINDOW) {
     view.setBounds({ x: 80, y: 52, width: bounds.width - x, height: bounds.height - y })
   }
 
-  return {
-    view,
-    hide() {
-      hide()
-    },
-    show() {
-      show()
-    },
-    load() {
-      // view.webContents.loadURL('http://www.baidu.com')
-      view.webContents.loadURL(path.join('file://', __dirname, '/asset/webview2.html'))
+  let ret = {
+  }
+  ret.isShowed = false
+
+  ret.view = view
+
+  ret.toggle = function () {
+    if (!ret.isShowed) {
+      ret.show()
+    } else {
+      ret.hide()
     }
   }
+
+  ret.hide = function () {
+    ret.isShowed = false
+    hide()
+  }
+  ret.show = function () {
+    ret.isShowed = true
+    show()
+  }
+
+  ret.load = function () {
+    view.webContents.loadURL(path.join('file://', __dirname, '/asset/webview2.html'))
+  }
+
+  return ret
 }
 
 async function createWindow () {
   MAIN_WINDOW = new BrowserWindow(electronConfig.get('windowsOption'))
-  
+
   // if (process.platform === 'linux') {
   //   windowOptions.icon = path.join(__dirname, '/assets/app-icon/png/512.png')
   // }
@@ -108,9 +132,12 @@ async function createWindow () {
 
   // loding page
   MAIN_WINDOW.loadURL(path.join('file://', __dirname, '/asset/loading.html'))
-  
-  // tray 
+
+  // tray
   setTray();
+
+  // short cut
+  setShortCut();
 
   // egg server
   await startServer(eggConfig)
@@ -128,13 +155,11 @@ async function createWindow () {
     global.BROWSER_VIEW = createTabbedBrowserView(MAIN_WINDOW)
   }
 
-  global.BROWSER_VIEW.show()
   global.BROWSER_VIEW.load()
-  global.BROWSER_VIEW.view.webContents.openDevTools()
 
   // console.log(global.BROWSER_VIEW)
 
-  // MAIN_WINDOW.webContents.openDevTools();
+  MAIN_WINDOW.webContents.openDevTools();
 
   return MAIN_WINDOW
 }
@@ -169,7 +194,7 @@ async function startServer (options) {
     MAIN_WINDOW.loadURL(url)
     return true
   }
-  
+
   app.relaunch()
 }
 

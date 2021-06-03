@@ -45,9 +45,13 @@
 </template>
 <script>
 import ToolBar from "../components/ToolBar";
+import {BrowserViewMixin} from "../mixins/browserView";
 export default {
   name: 'Layout',
   components: {ToolBar},
+  mixins: [
+    BrowserViewMixin('browserViewShowed')
+  ],
   data() {
     return {
       collapsed: true,
@@ -58,6 +62,10 @@ export default {
         },
         'menu_2' : {
           icon: 'setting',
+          title: ''
+        },
+        'menu_3' : {
+          icon: 'appstore',
           title: ''
         },
       },
@@ -99,6 +107,9 @@ export default {
             params: {},
           }
         },
+        'menu_3' : {
+          poup: true
+        },
       },
       contentPage: ''
     };
@@ -110,11 +121,12 @@ export default {
     menuHandle (item) {
       this.subMenu = this.subMenuList[item.key]
       if (!this.subMenu.poup) {
+        this.hideBrowserView()
         this.subMenuKey = ['subMenu_1']
         const linkInfo = this.subMenu['subMenu_1']
         this.$router.push({ name: linkInfo.pageName, params: linkInfo.params})
       } else {
-      //
+        this.showBrowserView()
       }
     },
   },
