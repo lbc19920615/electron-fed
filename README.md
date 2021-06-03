@@ -15,6 +15,8 @@
 
 ![](./build/img/open_dir.png)
 
+![](./build/img/webview.png)
+
 ## 开始使用
 
 1. 下载
