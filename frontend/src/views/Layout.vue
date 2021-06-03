@@ -19,6 +19,7 @@
           <a-layout-sider
               theme="light"
               class="sub-layout-sider"
+              v-if="!subMenu.hideSubMenu"
           >
             <a-menu class="sub-menu-item" theme="light" mode="inline" v-model="subMenuKey" :default-selected-keys="subMenuKey">
               <a-menu-item :key="subIndex" v-for="(menuInfo, subIndex) in subMenu">
@@ -53,6 +54,10 @@ export default {
         },
         'menu_2' : {
           icon: 'setting',
+          title: ''
+        },
+        'menu_3' : {
+          icon: 'schedule',
           title: ''
         },
       },
@@ -94,6 +99,14 @@ export default {
             params: {},
           }
         },
+        'menu_3' : {
+          hideSubMenu: true,
+          'subMenu_1' : {
+            title: 'Webview',
+            pageName: 'Webview',
+            params: {},
+          }
+        }
       },
       contentPage: ''
     };
