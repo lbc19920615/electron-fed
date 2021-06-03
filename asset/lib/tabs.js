@@ -27,7 +27,7 @@ class TabGroup extends EventEmitter {
         this.viewContainer = document.querySelector(options.viewContainerSelector);
         this.tabs = [];
         this.newTabId = 0;
-        TabGroupPrivate.initNewTabButton.bind(this)();
+        // TabGroupPrivate.initNewTabButton.bind(this)();
         TabGroupPrivate.initVisibility.bind(this)();
         if (typeof this.options.ready === "function") {
             this.options.ready(this);
