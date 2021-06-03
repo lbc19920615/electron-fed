@@ -41,10 +41,16 @@ const config = {
       nodeIntegration: true,
       preload: path.join(__dirname, '../preload.js'),
       webviewTag: true,
-      nodeIntegrationInSubFrames: true
     },
     frame: false,
     titleBarStyle: 'hidden'
+  },
+  viewsOption: {
+    webPreferences: {
+      contextIsolation: false, // 设置此项为false后，才可在渲染进程中使用electron api
+      nodeIntegration: true,
+      webviewTag: true,
+    }
   },
   egg: {
     title: 'electron-egg',
@@ -76,6 +82,10 @@ exports.get = function (flag = '', env = 'prod') {
 
   if (flag === 'windowsOption') {
     return config.windowsOption;
+  }
+
+  if (flag === 'viewsOption') {
+    return config.viewsOption;
   }
 
   if (flag === 'webEgg') {

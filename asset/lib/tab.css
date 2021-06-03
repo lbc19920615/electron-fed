@@ -33,6 +33,7 @@
     font-size: 14px;
     background-color: #ccc;
     cursor: default;
+    box-sizing: border-box;
 }
 
 /* Dragula */
@@ -133,7 +134,7 @@
 .etabs-views {
     position: relative;
     border-top: 1px solid #aaa;
-    height: calc(100% - 32px);
+    height: calc(100% - 34px);
 }
 
 .etab-view {

@@ -1,4 +1,4 @@
-const {app, BrowserWindow, Menu} = require('electron')
+const {app, BrowserWindow, BrowserView, Menu} = require('electron')
 const path = require('path')
 const eggLauncher = require('./electron/lanucher')
 const setup = require('./electron/setup')
@@ -11,6 +11,10 @@ const setTray = require('./electron/tray')
 global.MAIN_WINDOW = null
 global.APP_TRAY = null;
 global.CAN_QUIT = false;
+
+
+// browser view
+global.BROWSER_VIEW = null
 
 // Initialize 
 setup()
@@ -55,6 +59,37 @@ async function initialize () {
   // });
 }
 
+function createTabbedBrowserView(MAIN_WINDOW) {
+  const bounds = MAIN_WINDOW.getBounds()
+  const view = new BrowserView(electronConfig.get('viewsOption'))
+  MAIN_WINDOW.addBrowserView(view)
+
+  const x = 80
+  const y = 52
+
+  function hide() {
+    view.setBounds({ x: 80, y: 52, width: 0, height: 0 })
+  }
+
+  function show() {
+    view.setBounds({ x: 80, y: 52, width: bounds.width - x, height: bounds.height - y })
+  }
+
+  return {
+    view,
+    hide() {
+      hide()
+    },
+    show() {
+      show()
+    },
+    load() {
+      // view.webContents.loadURL('http://www.baidu.com')
+      view.webContents.loadURL(path.join('file://', __dirname, '/asset/webview2.html'))
+    }
+  }
+}
+
 async function createWindow () {
   MAIN_WINDOW = new BrowserWindow(electronConfig.get('windowsOption'))
   
@@ -88,7 +123,18 @@ async function createWindow () {
     autoUpdater.checkUpdate();
   }
 
-  MAIN_WINDOW.webContents.openDevTools();
+  // set browser view
+  if (!global.BROWSER_VIEW) {
+    global.BROWSER_VIEW = createTabbedBrowserView(MAIN_WINDOW)
+  }
+
+  global.BROWSER_VIEW.show()
+  global.BROWSER_VIEW.load()
+  global.BROWSER_VIEW.view.webContents.openDevTools()
+
+  // console.log(global.BROWSER_VIEW)
+
+  // MAIN_WINDOW.webContents.openDevTools();
 
   return MAIN_WINDOW
 }

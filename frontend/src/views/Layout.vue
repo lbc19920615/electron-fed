@@ -60,10 +60,6 @@ export default {
           icon: 'setting',
           title: ''
         },
-        'menu_3' : {
-          icon: 'schedule',
-          title: ''
-        },
       },
       menuKey: 'menu_1',
       subMenuKey: ['subMenu_1'],
@@ -103,15 +99,6 @@ export default {
             params: {},
           }
         },
-        'menu_3' : {
-          hideSubMenu: true,
-          popup: true,
-          'subMenu_1' : {
-            title: 'Webview',
-            pageName: 'Webview',
-            params: {},
-          }
-        }
       },
       contentPage: ''
     };

@@ -7,8 +7,25 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>webview2</title>
     <link rel="stylesheet" href="./lib/tab.css">
+    <style>
+        html, body {
+            height: 100%;
+        }
+        body {
+            background-color: #fff;
+        }
+        webview {
+            position: absolute;
+            visibility: hidden;
+            width: 100%;
+            height: 100%;
+        }
+        webview.visible {
+            visibility: visible;
+        }
+    </style>
 </head>
-<body style="margin: 0">
+<body style="margin: 0;">
 <div class="page-webview" style="height: 100%;">
 <div class="etabs-tabgroup">
     <div class="etabs-tabs"></div>
@@ -17,6 +34,9 @@
 <div class="etabs-views"></div>
 </div>
 </body>
+<script>
+    global.EventEmitter = require('events');
+</script>
 <script src="./lib/tabs.js"></script>
 <script>
     let tabGroup = new global.TabGroup({

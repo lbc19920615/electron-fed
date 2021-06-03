@@ -37,14 +37,6 @@ export const constantRouterMap = [
         name: 'Setting',
         component: () => import('@/views/Setting')
       },
-      {
-        path: 'webview',
-        name: 'Webview',
-        component: () => import('@/views/Webview'),
-        meta: {
-          keepAlive: true
-        }
-      },
     ]
   }
 ]

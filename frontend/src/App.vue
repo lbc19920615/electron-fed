@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     <Layout />
-    <iframe frameborder="0" class="visible" style="position: fixed; width: 100%; left: 0; top: 0; z-index: 1000;" nodeintegration src="/webview2.html"></iframe>
   </div>
 </template>
 
