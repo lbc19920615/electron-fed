@@ -111,6 +111,10 @@ function createTabbedBrowserView(MAIN_WINDOW) {
     view.webContents.loadURL(path.join('file://', __dirname, '/asset/webview2.html'))
   }
 
+  ret.toggleDevTools = function () {
+    view.webContents.toggleDevTools()
+  }
+
   return ret
 }
 
@@ -159,7 +163,7 @@ async function createWindow () {
 
   // console.log(global.BROWSER_VIEW)
 
-  MAIN_WINDOW.webContents.openDevTools();
+  // MAIN_WINDOW.webContents.openDevTools();
 
   return MAIN_WINDOW
 }
