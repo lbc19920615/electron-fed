@@ -105,6 +105,7 @@ export default {
         },
         'menu_3' : {
           hideSubMenu: true,
+          popup: true,
           'subMenu_1' : {
             title: 'Webview',
             pageName: 'Webview',
@@ -121,9 +122,13 @@ export default {
   methods: {
     menuHandle (item) {
       this.subMenu = this.subMenuList[item.key]
-      this.subMenuKey = ['subMenu_1']
-      const linkInfo = this.subMenu['subMenu_1']
-      this.$router.push({ name: linkInfo.pageName, params: linkInfo.params})
+      if (!this.subMenu.poup) {
+        this.subMenuKey = ['subMenu_1']
+        const linkInfo = this.subMenu['subMenu_1']
+        this.$router.push({ name: linkInfo.pageName, params: linkInfo.params})
+      } else {
+      //
+      }
     },
   },
 };

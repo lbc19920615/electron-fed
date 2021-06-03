@@ -34,6 +34,9 @@ export default {
       src: "http://electron.atom.io",
       visible: true,
       active: true,
+      ready(context) {
+        console.log(context)
+      }
     });
   }
 }
