@@ -7,17 +7,17 @@ answerRenderer('example.hello', async (msg) => {
   return reply
 })
 
-answerRenderer('example.show.browserview', async () => {
-  if (global.BROWSER_VIEW) {
-    global.BROWSER_VIEW.show()
+answerRenderer('example.show.browserview', async (key) => {
+  if (global.MAIN_WINDOW_VIEWS.has((key))) {
+    global.MAIN_WINDOW_VIEWS.get(key).show()
     return true
   }
   return false
 })
 
-answerRenderer('example.hide.browserview', async () => {
-  if (global.BROWSER_VIEW) {
-    global.BROWSER_VIEW.hide()
+answerRenderer('example.hide.browserview', async (key) => {
+  if (global.MAIN_WINDOW_VIEWS.has((key))) {
+    global.MAIN_WINDOW_VIEWS.get(key).hide()
     return true
   }
   return false

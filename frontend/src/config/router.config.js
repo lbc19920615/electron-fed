@@ -20,11 +20,17 @@ export const constantRouterMap = [
       {
         path: 'ipc',
         name: 'Ipc',
+        meta: {
+          keepAlive: true
+        },
         component: () => import('@/views/example/Ipc')
       },
       {
         path: 'systemInfo',
         name: 'SystemInfo',
+        meta: {
+          keepAlive: true
+        },
         component: () => import('@/views/example/SystemInfo')
       },
       {

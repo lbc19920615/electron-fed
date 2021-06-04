@@ -8,14 +8,15 @@ const is = require('electron-is')
 const setTray = require('./electron/tray')
 const { setShortCut, unsetShortCut } = require('./electron/shortCut')
 
+const TabbedBrowserView = require('./electron/views/TabbedBrowserView')
+
 // main window
 global.MAIN_WINDOW = null
 global.APP_TRAY = null;
 global.CAN_QUIT = false;
 
-
-// browser view
-global.BROWSER_VIEW = null
+// browser views
+global.MAIN_WINDOW_VIEWS = new Map();
 
 // Initialize
 setup()
@@ -64,59 +65,6 @@ async function initialize () {
   // });
 }
 
-function createTabbedBrowserView(MAIN_WINDOW) {
-  const bounds = MAIN_WINDOW.getBounds()
-  const view = new BrowserView(electronConfig.get('viewsOption'))
-  view.setAutoResize({
-    width: true,
-    height: true
-  })
-  MAIN_WINDOW.addBrowserView(view)
-
-  const x = 80
-  const y = 52
-
-  function hide() {
-    view.setBounds({ x: 80, y: 52, width: 0, height: 0 })
-  }
-
-  function show() {
-    view.setBounds({ x: 80, y: 52, width: bounds.width - x, height: bounds.height - y })
-  }
-
-  let ret = {
-  }
-  ret.isShowed = false
-
-  ret.view = view
-
-  ret.toggle = function () {
-    if (!ret.isShowed) {
-      ret.show()
-    } else {
-      ret.hide()
-    }
-  }
-
-  ret.hide = function () {
-    ret.isShowed = false
-    hide()
-  }
-  ret.show = function () {
-    ret.isShowed = true
-    show()
-  }
-
-  ret.load = function () {
-    view.webContents.loadURL(path.join('file://', __dirname, '/asset/webview2.html'))
-  }
-
-  ret.toggleDevTools = function () {
-    view.webContents.toggleDevTools()
-  }
-
-  return ret
-}
 
 async function createWindow () {
   MAIN_WINDOW = new BrowserWindow(electronConfig.get('windowsOption'))
@@ -156,14 +104,16 @@ async function createWindow () {
 
   // set browser view
   if (!global.BROWSER_VIEW) {
-    global.BROWSER_VIEW = createTabbedBrowserView(MAIN_WINDOW)
+    let view = new TabbedBrowserView(MAIN_WINDOW)
+    global.MAIN_WINDOW_VIEWS.set(view.name, view)
   }
 
-  global.BROWSER_VIEW.load()
-
-  // console.log(global.BROWSER_VIEW)
-
-  // MAIN_WINDOW.webContents.openDevTools();
+  global.MAIN_WINDOW_VIEWS.forEach((view) => {
+    view.loadURL(
+        path.join('file://', __dirname, '/asset/webview2.html')
+    )
+    view.addToWindow()
+  })
 
   return MAIN_WINDOW
 }

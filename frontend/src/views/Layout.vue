@@ -16,19 +16,19 @@
       <tool-bar></tool-bar>
       <a-layout-content>
         <a-layout :style="{height: '100%'}">
-          <a-layout-sider
-              theme="light"
-              class="sub-layout-sider"
-              v-if="!subMenu.hideSubMenu"
-          >
-            <a-menu class="sub-menu-item" theme="light" mode="inline" v-model="subMenuKey" :default-selected-keys="subMenuKey">
-              <a-menu-item :key="subIndex" v-for="(menuInfo, subIndex) in subMenu">
-                <router-link :to="{ name: menuInfo.pageName, params: menuInfo.params}">
-                  <span>{{ menuInfo.title }}</span>
-                </router-link>
-              </a-menu-item>
-            </a-menu>
-          </a-layout-sider>
+<!--          <a-layout-sider-->
+<!--              theme="light"-->
+<!--              class="sub-layout-sider"-->
+<!--              v-if="!subMenu.hideSubMenu"-->
+<!--          >-->
+<!--            <a-menu class="sub-menu-item" theme="light" mode="inline" v-model="subMenuKey" :default-selected-keys="subMenuKey">-->
+<!--              <a-menu-item :key="subIndex" v-for="(menuInfo, subIndex) in subMenu">-->
+<!--                <router-link :to="{ name: menuInfo.pageName, params: menuInfo.params}">-->
+<!--                  <span>{{ menuInfo.title }}</span>-->
+<!--                </router-link>-->
+<!--              </a-menu-item>-->
+<!--            </a-menu>-->
+<!--          </a-layout-sider>-->
           <a-layout-content :style="{height: '100%'}">
             <div class="app-content-container" :style="{ padding: '0', background: '#fff', height: '100%' }">
               <keep-alive>
@@ -60,10 +60,10 @@ export default {
           icon: 'home',
           title: ''
         },
-        'menu_2' : {
-          icon: 'setting',
-          title: ''
-        },
+        // 'menu_2' : {
+        //   icon: 'setting',
+        //   title: ''
+        // },
         'menu_3' : {
           icon: 'appstore',
           title: ''
@@ -74,31 +74,32 @@ export default {
       subMenu: {},
       subMenuList: {
         'menu_1' : {
+
+          // 'subMenu_1' : {
+          //   title: '上传文件到sm图床',
+          //   pageName: 'UploadFile',
+          //   params: {}
+          // },
+        //   'subMenu_2' : {
+        //     title: '打开文件夹',
+        //     pageName: 'FileOpenDir',
+        //     params: {},
+        //   },
           'subMenu_1' : {
-            title: '上传文件到sm图床',
-            pageName: 'UploadFile',
-            params: {}
-          },
-          'subMenu_2' : {
-            title: '打开文件夹',
-            pageName: 'FileOpenDir',
-            params: {},
-          },
-          'subMenu_3' : {
             title: '通信',
             pageName: 'Ipc',
             params: {},
           },
-          'subMenu_4' : {
-            title: '获取系统信息',
-            pageName: 'SystemInfo',
-            params: {},
-          },
-          'subMenu_5' : {
-            title: '加载wasm',
-            pageName: 'Md5Wasm',
-            params: {},
-          }
+        //   'subMenu_4' : {
+        //     title: '获取系统信息',
+        //     pageName: 'SystemInfo',
+        //     params: {},
+        //   },
+        //   'subMenu_5' : {
+        //     title: '加载wasm',
+        //     pageName: 'Md5Wasm',
+        //     params: {},
+        //   }
         },
         'menu_2' : {
           'subMenu_1' : {
