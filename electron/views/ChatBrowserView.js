@@ -1,7 +1,7 @@
 const CommonBrowserView = require('./CommonBrowserView')
 const electronConfig = require('../config')
 
-module.exports = class TabbedBrowserView extends CommonBrowserView {
+module.exports = class ChatBrowserView extends CommonBrowserView {
     constructor(MAIN_WINDOW) {
         super(MAIN_WINDOW)
 

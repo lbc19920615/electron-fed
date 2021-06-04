@@ -7,6 +7,11 @@ export let BrowserViewMixin = ({computedKey} = {}) => {
       }
     },
     methods: {
+      setTopBrowserView(key) {
+        this.$callMain('example.top.browserview', key).then(() => {
+        //
+        })
+      },
       showBrowserView() {
         if (!this.$store.state.app.browserViewShowed) {
           this.$callMain('example.show.browserview', 'TabbedBrowserView').then(() => {

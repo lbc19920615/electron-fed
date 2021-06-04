@@ -18,14 +18,6 @@ export const constantRouterMap = [
         component: () => import('@/views/example/UploadFile')
       },
       {
-        path: 'ipc',
-        name: 'Ipc',
-        meta: {
-          keepAlive: true
-        },
-        component: () => import('@/views/example/Ipc')
-      },
-      {
         path: 'systemInfo',
         name: 'SystemInfo',
         meta: {
@@ -44,5 +36,23 @@ export const constantRouterMap = [
         component: () => import('@/views/Setting')
       },
     ]
-  }
+  },
+  {
+    path: '/ipc',
+    name: 'Ipc',
+    meta: {
+      keepAlive: true,
+      noFrame: true,
+    },
+    component: () => import('@/views/example/Ipc')
+  },
+  {
+    path: '/test',
+    name: 'Test',
+    meta: {
+      keepAlive: true,
+      noFrame: true,
+    },
+    component: () => import('@/views/example/Test')
+  },
 ]

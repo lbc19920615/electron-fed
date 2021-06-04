@@ -1,11 +1,16 @@
 const {BrowserView} = require('electron')
+const {isFunction} = require('../utils')
 
 module.exports = class CommonBrowserView {
-    constructor(win, name) {
+    constructor(win) {
         this.win = win
-        this.name = name
         this.isShowed = false
         this.view = null
+        this.url = ''
+        this.isLoaded = false
+    }
+    getClsName() {
+        return this.constructor.name;
     }
     _init(options = {}, show, hide) {
         const view = new BrowserView(options)
@@ -34,6 +39,15 @@ module.exports = class CommonBrowserView {
             show(self)
         }
     }
+    loadOnce(url = '', onFirstLoaded = () => {}) {
+        if (!this.isLoaded) {
+            this.isLoaded = true
+            this.loadURL(url)
+            if (isFunction(onFirstLoaded)) {
+                onFirstLoaded()
+            }
+        }
+    }
     loadURL(url = '') {
         this.view.webContents.loadURL(url)
     }
@@ -42,5 +56,8 @@ module.exports = class CommonBrowserView {
     }
     addToWindow() {
         this.win.addBrowserView(this.view)
+    }
+    setTop() {
+        this.win.setTopBrowserView(this.view)
     }
 }

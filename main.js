@@ -8,7 +8,16 @@ const is = require('electron-is')
 const setTray = require('./electron/tray')
 const { setShortCut, unsetShortCut } = require('./electron/shortCut')
 
-const TabbedBrowserView = require('./electron/views/TabbedBrowserView')
+global.serverOrigin = ''
+
+const MAIN_WINDOW_VIEWS_CONFIG = {
+  ['TabbedBrowserView']: {
+    url: path.join('file://', __dirname, '/asset/webview2.html')
+  },
+  ['ChatBrowserView']: {
+    url: '__SERVER__/ipc'
+  }
+}
 
 // main window
 global.MAIN_WINDOW = null
@@ -102,18 +111,15 @@ async function createWindow () {
     autoUpdater.checkUpdate();
   }
 
-  // set browser view
-  if (!global.BROWSER_VIEW) {
-    let view = new TabbedBrowserView(MAIN_WINDOW)
-    global.MAIN_WINDOW_VIEWS.set(view.name, view)
-  }
-
-  global.MAIN_WINDOW_VIEWS.forEach((view) => {
-    view.loadURL(
-        path.join('file://', __dirname, '/asset/webview2.html')
-    )
+  // set browser views
+  for (const [key, config] of Object.entries(MAIN_WINDOW_VIEWS_CONFIG)) {
+    const viewCls = require('./electron/views/' + key)
+    let view = new viewCls(MAIN_WINDOW)
+    global.MAIN_WINDOW_VIEWS.set(key, view)
+    view.url = config.url
     view.addToWindow()
-  })
+    view.show()
+  }
 
   return MAIN_WINDOW
 }
@@ -141,6 +147,7 @@ async function startServer (options) {
         break
     }
   }
+  global.serverOrigin = url
   ELog.info('[main] [url]:', url)
   startRes = await eggLauncher.start(options).then((res) => res, (err) => err)
   ELog.info('[main] [startServer] startRes:', startRes)

@@ -1,6 +1,12 @@
 <template>
   <div id="app">
-    <Layout />
+    <div v-if="$route.meta.noFrame">
+      <keep-alive>
+        <router-view v-if="$route.meta.keepAlive"></router-view>
+      </keep-alive>
+      <router-view v-if="!$route.meta.keepAlive"></router-view>
+    </div>
+    <Layout v-else />
   </div>
 </template>
 

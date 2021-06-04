@@ -1,5 +1,7 @@
 <template>
-  <a-layout id="components-layout-demo-responsive">
+  <a-layout id="components-layout-demo-responsive"
+
+  >
     <a-layout-sider
       v-model="collapsed"
       theme="light"
@@ -16,26 +18,8 @@
       <tool-bar></tool-bar>
       <a-layout-content>
         <a-layout :style="{height: '100%'}">
-<!--          <a-layout-sider-->
-<!--              theme="light"-->
-<!--              class="sub-layout-sider"-->
-<!--              v-if="!subMenu.hideSubMenu"-->
-<!--          >-->
-<!--            <a-menu class="sub-menu-item" theme="light" mode="inline" v-model="subMenuKey" :default-selected-keys="subMenuKey">-->
-<!--              <a-menu-item :key="subIndex" v-for="(menuInfo, subIndex) in subMenu">-->
-<!--                <router-link :to="{ name: menuInfo.pageName, params: menuInfo.params}">-->
-<!--                  <span>{{ menuInfo.title }}</span>-->
-<!--                </router-link>-->
-<!--              </a-menu-item>-->
-<!--            </a-menu>-->
-<!--          </a-layout-sider>-->
           <a-layout-content :style="{height: '100%'}">
             <div class="app-content-container" :style="{ padding: '0', background: '#fff', height: '100%' }">
-              <keep-alive>
-<!--                <div v-if="$route.meta.keepAlive"> keepAlive: true</div>-->
-                <router-view v-if="$route.meta.keepAlive"></router-view>
-              </keep-alive>
-              <router-view v-if="!$route.meta.keepAlive"></router-view>
             </div>
           </a-layout-content>
         </a-layout>
@@ -74,7 +58,7 @@ export default {
       subMenu: {},
       subMenuList: {
         'menu_1' : {
-
+          viewKey: 'ChatBrowserView',
           // 'subMenu_1' : {
           //   title: '上传文件到sm图床',
           //   pageName: 'UploadFile',
@@ -85,11 +69,11 @@ export default {
         //     pageName: 'FileOpenDir',
         //     params: {},
         //   },
-          'subMenu_1' : {
-            title: '通信',
-            pageName: 'Ipc',
-            params: {},
-          },
+        //   'subMenu_1' : {
+        //     title: '通信',
+        //     pageName: 'Ipc',
+        //     params: {},
+        //   },
         //   'subMenu_4' : {
         //     title: '获取系统信息',
         //     pageName: 'SystemInfo',
@@ -109,7 +93,7 @@ export default {
           }
         },
         'menu_3' : {
-          poup: true
+          viewKey: 'TabbedBrowserView'
         },
       },
       contentPage: ''
@@ -121,14 +105,16 @@ export default {
   methods: {
     menuHandle (item) {
       this.subMenu = this.subMenuList[item.key]
-      if (!this.subMenu.poup) {
-        this.hideBrowserView()
-        this.subMenuKey = ['subMenu_1']
-        const linkInfo = this.subMenu['subMenu_1']
-        this.$router.push({ name: linkInfo.pageName, params: linkInfo.params})
-      } else {
-        this.showBrowserView()
-      }
+      console.log(this.subMenu.viewKey)
+      this.setTopBrowserView(this.subMenu.viewKey)
+      // if (!this.subMenu.poup) {
+      //   // this.hideBrowserView()
+      //   this.subMenuKey = ['subMenu_1']
+      //   const linkInfo = this.subMenu['subMenu_1']
+      //   this.$router.push({ name: linkInfo.pageName, params: linkInfo.params})
+      // } else {
+      //   this.setTopBrowserView()
+      // }
     },
   },
 };
