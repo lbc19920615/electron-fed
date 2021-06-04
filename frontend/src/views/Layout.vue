@@ -1,18 +1,30 @@
 <template>
-  <a-layout id="components-layout-demo-responsive"
-
-  >
+  <a-layout id="components-layout-demo-responsive">
     <a-layout-sider
       v-model="collapsed"
       theme="light"
       class="layout-sider"
     >
-      <div class="logo"><img class="pic-logo" src="~@/assets/logo.png"></div>
-      <a-menu class="menu-item" theme="light" mode="inline" @click="menuHandle" :default-selected-keys="['menu_1']">
-        <a-menu-item :key="index" v-for="(menuInfo, index) in menu" :title="menuInfo.title">
-          <a-icon :type="menuInfo.icon" />
-        </a-menu-item>
-      </a-menu>
+      <div class="ui-column-between" style="height: 100%;">
+        <div>
+          <div class="logo"><img class="pic-logo" src="~@/assets/logo.png"></div>
+          <div @mousedown.stop="noopHandle">
+            <a-menu
+                ref="menu"
+                class="menu-item" theme="light" mode="inline" @click="menuHandle"
+                :default-selected-keys="['menu_1']">
+              <a-menu-item
+                  :key="index"
+                  v-for="(menuInfo, index) in menu" :title="menuInfo.title">
+                <a-icon :type="menuInfo.icon" />
+              </a-menu-item>
+            </a-menu>
+          </div>
+        </div>
+        <div @mousedown.stop="popupHandle"  style="height: 60px">
+          <a-icon type="ellipsis" />
+        </div>
+      </div>
     </a-layout-sider>
     <a-layout>
       <tool-bar></tool-bar>
@@ -95,6 +107,10 @@ export default {
         'menu_3' : {
           viewKey: 'TabbedBrowserView'
         },
+        'menu_4' : {
+          popup: true,
+          viewKey: 'MoreBrowserView'
+        }
       },
       contentPage: ''
     };
@@ -103,10 +119,17 @@ export default {
     this.menuHandle({key: 'menu_1'})
   },
   methods: {
+    noopHandle: function () {
+    },
+    popupHandle () {
+      this.setTopBrowserView('MoreBrowserView').then(() => {
+        this.$callMain('browerView.currentPopup', 'MoreBrowserView')
+      })
+    },
     menuHandle (item) {
       this.subMenu = this.subMenuList[item.key]
-      console.log(this.subMenu.viewKey)
-      this.setTopBrowserView(this.subMenu.viewKey)
+      this.setTopBrowserView(this.subMenu.viewKey).then(() => {
+      })
       // if (!this.subMenu.poup) {
       //   // this.hideBrowserView()
       //   this.subMenuKey = ['subMenu_1']
@@ -123,6 +146,7 @@ export default {
 <style lang="less" scoped>
 // 嵌套
 #components-layout-demo-responsive {
+  -webkit-user-select: none;
   height: 100%;
   .logo {
     border-bottom: 1px solid #e8e8e8;

@@ -9,6 +9,7 @@ const setTray = require('./electron/tray')
 const { setShortCut, unsetShortCut } = require('./electron/shortCut')
 
 global.serverOrigin = ''
+global.currentPopup = null
 
 const MAIN_WINDOW_VIEWS_CONFIG = {
   ['TabbedBrowserView']: {
@@ -16,6 +17,9 @@ const MAIN_WINDOW_VIEWS_CONFIG = {
   },
   ['ChatBrowserView']: {
     url: '__SERVER__/ipc'
+  },
+  ['MoreBrowserView']: {
+    url: '__SERVER__/test'
   }
 }
 

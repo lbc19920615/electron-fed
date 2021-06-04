@@ -1,24 +1,16 @@
 <template>
-  <div id="app">
-    <div v-if="$route.meta.noFrame">
-      <keep-alive>
-        <router-view v-if="$route.meta.keepAlive"></router-view>
-      </keep-alive>
-      <router-view v-if="!$route.meta.keepAlive"></router-view>
-    </div>
-    <Layout v-else />
+  <div id="app"          @mousedown="fireEvent">
+    <keep-alive>
+      <router-view v-if="$route.meta.keepAlive"></router-view>
+    </keep-alive>
+    <router-view v-if="!$route.meta.keepAlive"></router-view>
   </div>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
-// import { Button } from 'ant-design-vue'
-import Layout from './views/Layout'
-
 export default {
   name: 'App',
   components: {
-    Layout
   },
   data() {
     return {
@@ -32,6 +24,9 @@ export default {
     },
   },
   methods: {
+    fireEvent() {
+      document.dispatchEvent(new CustomEvent('popup-hide'))
+    },
     handleClick(e) {
       console.log('click', e);
     },

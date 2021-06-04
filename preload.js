@@ -2,14 +2,18 @@
 // It has the same sandbox as a Chrome extension.
 
 global.EventEmitter = require('events');
+global.__PROLOAD__ = true
 
-window.addEventListener('DOMContentLoaded', () => {
-  const replaceText = (selector, text) => {
-    const element = document.getElementById(selector)
-    if (element) element.innerText = text
-  }
+const { ipcRenderer } = require('electron')
+const { callMain } = require('./electron/inject')
 
-  for (const type of ['chrome', 'node', 'electron']) {
-    replaceText(`${type}-version`, process.versions[type])
-  }
-})
+global.makeDraggable = require('./electron/draggable')
+
+document.addEventListener(
+    'popup-hide',
+    function (e) {
+        console.log('popup-hide')
+        callMain(ipcRenderer,'browerView.outPopupMouseDown', global.location.href)
+    },
+    true
+)

@@ -39,6 +39,16 @@
 </script>
 <script src="./lib/tabs.js"></script>
 <script>
+    const { ipcRenderer } = require('electron')
+    document.addEventListener(
+        'mousedown',
+        function (e) {
+            e.stopPropagation()
+            ipcRenderer.send('mousedown-webview')
+        },
+        false
+    )
+
     let tabGroup = new global.TabGroup({
         newTab: {
             title: "New Tab",

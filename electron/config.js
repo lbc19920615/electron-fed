@@ -40,6 +40,7 @@ const config = {
       contextIsolation: false, // 设置此项为false后，才可在渲染进程中使用electron api
       nodeIntegration: true,
       preload: path.join(__dirname, '../preload.js'),
+      enableRemoteModule: true,
       webviewTag: true,
     },
     frame: false,
@@ -50,6 +51,14 @@ const config = {
       contextIsolation: false, // 设置此项为false后，才可在渲染进程中使用electron api
       nodeIntegration: true,
       webviewTag: true,
+      preload: path.join(__dirname, '../preload.js'),
+    }
+  },
+  popupOption: {
+    webPreferences: {
+      contextIsolation: false, // 设置此项为false后，才可在渲染进程中使用electron api
+      nodeIntegration: true,
+      // webviewTag: true,
     }
   },
   egg: {
@@ -86,6 +95,10 @@ exports.get = function (flag = '', env = 'prod') {
 
   if (flag === 'viewsOption') {
     return config.viewsOption;
+  }
+
+  if (flag === 'popupOption') {
+    return config.popupOption;
   }
 
   if (flag === 'webEgg') {

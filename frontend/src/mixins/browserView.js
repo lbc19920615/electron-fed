@@ -8,9 +8,7 @@ export let BrowserViewMixin = ({computedKey} = {}) => {
     },
     methods: {
       setTopBrowserView(key) {
-        this.$callMain('example.top.browserview', key).then(() => {
-        //
-        })
+        return this.$callMain('example.top.browserview', key)
       },
       showBrowserView() {
         if (!this.$store.state.app.browserViewShowed) {
