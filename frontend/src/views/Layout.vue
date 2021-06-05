@@ -22,7 +22,7 @@
           </div>
         </div>
         <div @mousedown.stop="popupHandle"  style="height: 60px">
-          <a-icon type="ellipsis" />
+          <i type="el-icon-more" ></i>
         </div>
       </div>
     </a-layout-sider>

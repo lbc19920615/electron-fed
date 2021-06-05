@@ -4,9 +4,10 @@
 global.EventEmitter = require('events');
 global.__PROLOAD__ = true
 
-const { ipcRenderer } = require('electron')
+const { ipcRenderer, remote } = require('electron')
 const { callMain } = require('./electron/inject')
 
+global.electronRemote = remote
 global.makeDraggable = require('./electron/draggable')
 
 document.addEventListener(
