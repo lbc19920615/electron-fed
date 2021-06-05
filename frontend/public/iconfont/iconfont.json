@@ -1,0 +1,37 @@
+{
+  "id": "2594292",
+  "name": "my-desktop-icon",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "14341926",
+      "name": "close",
+      "font_class": "close",
+      "unicode": "e7b4",
+      "unicode_decimal": 59316
+    },
+    {
+      "icon_id": "14341982",
+      "name": "minimize",
+      "font_class": "minimize",
+      "unicode": "e7bf",
+      "unicode_decimal": 59327
+    },
+    {
+      "icon_id": "14341983",
+      "name": "maximize",
+      "font_class": "maximize",
+      "unicode": "e7c0",
+      "unicode_decimal": 59328
+    },
+    {
+      "icon_id": "14341987",
+      "name": "normal-size",
+      "font_class": "normal-size",
+      "unicode": "e7c1",
+      "unicode_decimal": 59329
+    }
+  ]
+}
