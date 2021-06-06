@@ -8,20 +8,20 @@
     >
       <div>&nbsp;</div>
       <el-row type="flex" justify="center" align="middle">
-        <el-button size="mini" @click.stop="clickMin"
+        <a-button class="tool-bar__btn" @mousedown.stop="clickMin"
           ><i class="iconfont icon-minimize"
-        /></el-button>
-        <el-button size="mini" @click.stop="clickMax"
+        /></a-button>
+        <a-button class="tool-bar__btn" @mousedown.stop="clickMax"
                    v-if="!isFullScreen"
           ><i class="iconfont icon-normal-size"
-        /></el-button>
-        <el-button size="mini" @click.stop="clickNormal"
+        /></a-button>
+        <a-button class="tool-bar__btn" @mousedown.stop="clickNormal"
                    v-if="isFullScreen"
           ><i class="iconfont icon-maximize"
-        /></el-button>
-        <el-button size="mini" @click.stop="clickClose"
+        /></a-button>
+        <a-button class="tool-bar__btn" @mousedown.stop="clickClose"
           ><i class="iconfont icon-close"
-        /></el-button>
+        /></a-button>
       </el-row>
     </el-row>
   </el-header>
@@ -36,6 +36,9 @@
     display: flex;
     justify-content: space-between;
     height: 100%;
+  }
+  .tool-bar__btn {
+    margin-left: 10px;
   }
 }
 </style>
@@ -58,18 +61,26 @@ export default {
     }
   },
   methods: {
-    clickMin() {
-      alert(1);
+    clickMin(e) {
+      e.stopPropagation()
+      this.$callMain('win.minimize')
       // document.dispatchEvent(new CustomEvent('popup-hide'))
     },
-    clickMax() {
-      this.isFullScreen = true
+    clickMax(e) {
+      e.stopPropagation()
+      this.$callMain('win.maximize').then(() => {
+        this.isFullScreen = true
+      })
     },
-    clickNormal() {
-      this.isFullScreen = false
+    clickNormal(e) {
+      e.stopPropagation()
+      this.$callMain('win.unmaximize').then(() => {
+        this.isFullScreen = false
+      })
     },
-    clickClose() {
-      alert(1);
+    clickClose(e) {
+      e.stopPropagation()
+      this.$callMain('win.close')
     }
   },
 };
