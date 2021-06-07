@@ -6,6 +6,8 @@ const config = require('./config');
 const is = require('electron-is');
 const api = require('./api');
 const ipc = require('./ipc');
+// 截图窗口
+const capture = require('./capture');
 
 module.exports = () => {
   // 存储模块
@@ -23,6 +25,8 @@ module.exports = () => {
   api.setup();
   // ipc模块
   ipc.setup();
+  // 截图模块
+  capture.setup();
 }
 
 function logger () {
