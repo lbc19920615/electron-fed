@@ -59,8 +59,16 @@ export default {
     if (global.makeDraggable) {
       global.makeDraggable(this.$refs.toolBar.$el);
     }
+    this.$ipc.on('main:win:unmaximize', this.onUnmaxsize)
+  },
+  beforeDestroy() {
+    this.$ipc.off('main:win:unmaximize', this.onUnmaxsize)
   },
   methods: {
+    onUnmaxsize() {
+      console.log('unmaximize')
+      // this.isFullScreen = false
+    },
     clickMin(e) {
       e.stopPropagation()
       this.$callMain('win.minimize')

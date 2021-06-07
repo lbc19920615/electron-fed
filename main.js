@@ -4,6 +4,7 @@ const eggLauncher = require('./electron/lanucher')
 const setup = require('./electron/setup')
 const electronConfig = require('./electron/config')
 const storage = require('./electron/storage')
+const mainWin = require('./electron/mainWin')
 const is = require('electron-is')
 const setTray = require('./electron/tray')
 const { setShortCut, unsetShortCut } = require('./electron/shortCut')
@@ -103,6 +104,9 @@ async function createWindow () {
 
   // short cut
   setShortCut();
+
+  // tray
+  mainWin.setEvent(MAIN_WINDOW);
 
   // egg server
   await startServer(eggConfig)
