@@ -43,7 +43,7 @@ const config = {
       enableRemoteModule: true,
       webviewTag: true,
     },
-    frame: false,
+    // frame: false,
     titleBarStyle: 'hidden'
   },
   viewsOption: {

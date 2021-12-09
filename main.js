@@ -99,6 +99,8 @@ async function createWindow () {
   // loding page
   MAIN_WINDOW.loadURL(path.join('file://', __dirname, '/asset/loading.html'))
 
+  MAIN_WINDOW.toggleDevTools();
+
   // tray
   setTray();
 
