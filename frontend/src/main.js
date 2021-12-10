@@ -31,3 +31,18 @@ new Vue({
   store,
   render: h => h(App)
 }).$mount('#app')
+
+
+
+// window.addEventListener('keydown',e=>{
+//   const {altKey,ctrlKey,metaKey,keyCode} =e;
+//   console.log(altKey,ctrlKey,metaKey,keyCode)
+//   // alert([altKey,ctrlKey,metaKey,keyCode]);
+//   // if(ctrlKey){
+//   //
+//   // }
+//   const currentWindow = global.electronRemote.BrowserWindow.getFocusedWindow().webContents
+//   alert(currentWindow);
+//   currentWindow && currentWindow.toggleDevTools();
+//   e.preventDefault();
+// },false);

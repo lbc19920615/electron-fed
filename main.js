@@ -1,4 +1,4 @@
-const {app, BrowserWindow, BrowserView, Menu} = require('electron')
+const {app, BrowserWindow, Menu, ipcMain} = require('electron')
 const path = require('path')
 const eggLauncher = require('./electron/lanucher')
 const setup = require('./electron/setup')
@@ -99,8 +99,6 @@ async function createWindow () {
   // loding page
   MAIN_WINDOW.loadURL(path.join('file://', __dirname, '/asset/loading.html'))
 
-  MAIN_WINDOW.toggleDevTools();
-
   // tray
   setTray();
 
@@ -109,6 +107,10 @@ async function createWindow () {
 
   // tray
   mainWin.setEvent(MAIN_WINDOW);
+  ipcMain.on('win.toggle-dev-tools', (e, arg) => {
+    console.log(arg)
+    MAIN_WINDOW_VIEWS.get(arg.browerViewId).toggleDevTools()
+  })
 
   // egg server
   await startServer(eggConfig)
@@ -124,7 +126,7 @@ async function createWindow () {
   // set browser views
   for (const [key, config] of Object.entries(MAIN_WINDOW_VIEWS_CONFIG)) {
     const viewCls = require('./electron/views/' + key)
-    let view = new viewCls(MAIN_WINDOW)
+    let view = new viewCls(MAIN_WINDOW, {key})
     global.MAIN_WINDOW_VIEWS.set(key, view)
     view.url = config.url
     view.addToWindow()

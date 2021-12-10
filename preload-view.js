@@ -3,6 +3,7 @@
 
 global.EventEmitter = require('events');
 global.__PROLOAD__ = true
+global.require2 = require
 
 const { ipcRenderer } = require('electron')
 const electronRemote = require('electron').remote
@@ -21,5 +22,6 @@ document.addEventListener(
     true
 )
 
+global.IS_BROWSER_VIEW = true
 
 

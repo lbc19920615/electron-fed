@@ -1,3 +1,5 @@
+
+
 /**
  * 使electron draggable
  */
@@ -18,6 +20,9 @@ module.exports = makeDraggable = function (el) {
 }
 
 function makeDraggableFallback(el) {
+    const electronRemote = require('electron').remote
+    // const electronRemote = require('@electron/remote')
+
     // 方案一
     // el.style['-webkit-app-region'] = 'drag';
 
@@ -37,7 +42,7 @@ function makeDraggableFallback(el) {
     window.addEventListener('mousemove', (e) => {
         if (dragging) {
             const { pageX, pageY } = e;
-            const win = require('electron').remote.getCurrentWindow();
+            const win = electronRemote.getCurrentWindow();
             const pos = win.getPosition();
             pos[0] = pos[0] + pageX - mouseX;
             pos[1] = pos[1] + pageY - mouseY;

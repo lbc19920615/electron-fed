@@ -2,7 +2,7 @@ const CommonBrowserView = require('../lib/CommonBrowserView')
 const electronConfig = require('../config')
 
 module.exports = class ChatBrowserView extends CommonBrowserView {
-    constructor(MAIN_WINDOW) {
+    constructor(MAIN_WINDOW, {key} = {}) {
         super(MAIN_WINDOW)
 
         this._init(electronConfig.get('viewsOption'))
@@ -20,5 +20,10 @@ module.exports = class ChatBrowserView extends CommonBrowserView {
         }
 
         this._register({show, hide})
+
+        let webContents = this.view.webContents
+        webContents.once('dom-ready', function () {
+            webContents.executeJavaScript(`global.CURRENT_BROWSR_VIEW_KEY = '${key}'`)
+        })
     }
 }

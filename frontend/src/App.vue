@@ -18,6 +18,20 @@ export default {
       openKeys: ['sub1']
     };
   },
+  mounted() {
+    let self = this;
+    window.addEventListener('keydown', function (e) {
+      if (e.ctrlKey && e.code === 'KeyD') {
+        self.$callMain('win.toggle-dev-tools', {
+          browerViewId: global.CURRENT_BROWSR_VIEW_KEY
+        }).then(() => {
+
+
+        })
+      }
+
+    })
+  },
   watch: {
     openKeys(val) {
       console.log('openKeys', val);

@@ -16,3 +16,5 @@ export const callMain = (ipc: any, channel: string, param: object) => {
         })
     })
 }
+
+

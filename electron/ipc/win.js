@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const index_1 = require("./index");
-index_1.answerRenderer('win.maximize', async () => {
+(0, index_1.answerRenderer)('win.maximize', async () => {
     let win = global.MAIN_WINDOW;
     if (win && win.isMaximizable()) {
         win.blur();
@@ -11,7 +11,7 @@ index_1.answerRenderer('win.maximize', async () => {
     }
     return false;
 });
-index_1.answerRenderer('win.unmaximize', async () => {
+(0, index_1.answerRenderer)('win.unmaximize', async () => {
     let win = global.MAIN_WINDOW;
     if (win && win.isMaximizable()) {
         win.blur();
@@ -21,7 +21,7 @@ index_1.answerRenderer('win.unmaximize', async () => {
     }
     return false;
 });
-index_1.answerRenderer('win.minimize', async () => {
+(0, index_1.answerRenderer)('win.minimize', async () => {
     let win = global.MAIN_WINDOW;
     if (win && win.isMinimizable()) {
         win.blur();
@@ -30,7 +30,7 @@ index_1.answerRenderer('win.minimize', async () => {
     }
     return false;
 });
-index_1.answerRenderer('win.close', async () => {
+(0, index_1.answerRenderer)('win.close', async () => {
     let win = global.MAIN_WINDOW;
     if (win && win.isClosable()) {
         win.close();

@@ -92,6 +92,7 @@
   "author": "lbc19920615, Inc <1585638808@qq.com>",
   "license": "Apache",
   "devDependencies": {
+    "@electron/remote": "^2.0.1",
     "autod": "^3.0.1",
     "autod-egg": "^1.1.0",
     "devtron": "^1.4.0",
