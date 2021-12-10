@@ -11,10 +11,11 @@ answerRenderer('browerView.outPopupMouseDown', async (from) => {
 })
 
 answerRenderer('browerView.currentPopup', async (key) => {
-    console.log('global.currentPopup', key)
+    // console.log('global.currentPopup', key)
     if (global.MAIN_WINDOW_VIEWS.get(key)) {
         global.currentPopup = global.MAIN_WINDOW_VIEWS.get(key)
         global.currentPopup.show()
+        // global.currentPopup.toggleDevTools()
         return true
     }
     return false

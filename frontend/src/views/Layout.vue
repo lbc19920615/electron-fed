@@ -21,8 +21,8 @@
             </a-menu>
           </div>
         </div>
-        <div @mousedown.stop="popupHandle"  style="height: 60px">
-          <i type="el-icon-more" ></i>
+        <div class="menu-bottom" @mousedown.stop="popupHandle"  style="height: 60px">
+          <svg t="1639126522445" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2326" width="16" height="16"><path d="M227.14123 413.647995c-52.14973 0-94.587262 42.439578-94.587262 94.587262 0 52.14973 42.437531 94.587262 94.587262 94.587262 52.147684 0 94.587262-42.437531 94.587262-94.587262C321.728492 456.087573 279.288914 413.647995 227.14123 413.647995z" p-id="2327"></path><path d="M510.903016 413.647995c-52.14973 0-94.587262 42.439578-94.587262 94.587262 0 52.14973 42.437531 94.587262 94.587262 94.587262 52.147684 0 94.587262-42.437531 94.587262-94.587262C605.490278 456.087573 563.051723 413.647995 510.903016 413.647995z" p-id="2328"></path><path d="M794.665825 413.647995c-52.14973 0-94.587262 42.439578-94.587262 94.587262 0 52.14973 42.437531 94.587262 94.587262 94.587262 52.147684 0 94.587262-42.437531 94.587262-94.587262C889.253086 456.087573 846.813508 413.647995 794.665825 413.647995z" p-id="2329"></path></svg>
         </div>
       </div>
     </a-layout-sider>
@@ -150,6 +150,8 @@ export default {
   -webkit-user-select: none;
   height: 100%;
   .logo {
+    text-align: center;
+
     border-bottom: 1px solid #e8e8e8;
   }
   .pic-logo {
@@ -197,5 +199,11 @@ export default {
   > div {
     height: 100%;
   }
+}
+
+.menu-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>

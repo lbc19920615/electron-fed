@@ -18,6 +18,6 @@ module.exports = class TabbedBrowserView extends CommonBrowserView {
             self._initBounds([x, y])
         }
 
-        this._register({show, hide})
+        this._register({show, hide});
     }
 }
