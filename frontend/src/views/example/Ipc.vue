@@ -1,6 +1,7 @@
 <template>
   <div>
     <div>
+      <button @click="openFile">openFile</button>
       <button @click="saveFile">saveFile</button>
 <!--      <h3 :style="{ marginBottom: '16px' }">-->
 <!--        demo3 渲染进程与主进程IPC通信-->
@@ -29,7 +30,32 @@
   </div>
 </template>
 <script>
-import { executeJS } from '@/api/main'
+import { executeJS } from '@/api/main';
+
+function electronOpen() {
+  return new Promise(resolve => {
+    const fs = global.require('fs');
+    const remote = global.require('electron').remote;
+    remote.dialog.showOpenDialog({
+      properties: [ 'openFile' ],
+    })
+        .then(result => {
+          // console.log(result.canceled);
+          // console.log(result.filePaths);
+          if (!result.canceled) {
+            if (result.filePaths && result.filePaths[0]) {
+              let buffer = fs.readFileSync(result.filePaths[0]);
+              // console.log(buffer)
+              resolve(new Blob([buffer]))
+            }
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+  });
+}
+
 export default {
   data() {
     return {
@@ -43,6 +69,12 @@ export default {
   },
 
   methods: {
+    openFile() {
+      electronOpen().then(async (blob) => {
+        let text = await blob.text();
+        console.log(text)
+      })
+    },
     saveFile() {
       let fs = global.require2('fs');
       console.log(fs)
