@@ -10,6 +10,7 @@ const electronRemote = require('electron').remote
 // const remote = require('@electron/remote')
 const { callMain } = require('./electron/inject')
 
+global.electronCallMain
 global.electronRemote = electronRemote
 global.makeDraggable = require('./electron/draggable')
 
@@ -24,4 +25,13 @@ document.addEventListener(
 
 global.IS_BROWSER_VIEW = true
 
+document.addEventListener('keydown', function (e) {
+  if (e.ctrlKey && e.code === 'KeyD') {
+    // alert([1, global.CURRENT_BROWSR_VIEW_KEY])
+    callMain(ipcRenderer,'win.toggle-dev-tools', {
+      browerViewId: global.CURRENT_BROWSR_VIEW_KEY
+    }).then(() => {
+    })
+  }
 
+})

@@ -27,7 +27,7 @@
       </div>
     </a-layout-sider>
     <a-layout>
-      <tool-bar></tool-bar>
+<!--      <tool-bar></tool-bar>-->
       <a-layout-content>
         <a-layout :style="{height: '100%'}">
           <a-layout-content :style="{height: '100%'}">
@@ -44,6 +44,7 @@ import ToolBar from "../components/ToolBar";
 import {BrowserViewMixin} from "../mixins/browserView";
 export default {
   name: 'Layout',
+  // eslint-disable-next-line vue/no-unused-components
   components: {ToolBar},
   mixins: [
     BrowserViewMixin('browserViewShowed')

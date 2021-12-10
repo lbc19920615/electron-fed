@@ -18,9 +18,17 @@ const callMain = (ipc, channel, param) => {
   })
 }
 
+/**
+ *
+ * @param channel
+ * @param param
+ * @returns {Promise<*>}
+ */
+export const callMainProcess = (channel, param) => callMain(ipc, channel, param)
+
 export default {
   install(Vue) {
     Vue.prototype.$ipc = ipc // 全局注入ipc
-    Vue.prototype.$callMain = (channel, param) => callMain(ipc, channel, param) // 全局注入调用主进程函数的方法
+    Vue.prototype.$callMain = callMainProcess // 全局注入调用主进程函数的方法
   }
 }

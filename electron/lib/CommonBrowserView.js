@@ -64,4 +64,10 @@ module.exports = class CommonBrowserView {
       this.win.setTopBrowserView(this.view)
     }
   }
+  _initBounds([x, y]) {
+    let self = this
+    const bounds = self.win.getBounds();
+    let contentSize = self.win.getContentSize();
+    self.view.setBounds({ x, y, width: contentSize[0] - x, height: contentSize[1] - y })
+  }
 }

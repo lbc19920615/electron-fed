@@ -52,7 +52,8 @@ const config = {
       nodeIntegration: true,
       webviewTag: true,
       preload: path.join(__dirname, '../preload-view.js'),
-      enableRemoteModule: true
+      enableRemoteModule: true,
+      nodeIntegrationInSubFrames: true
     }
   },
   popupOption: {

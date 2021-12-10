@@ -1,4 +1,5 @@
 const {app, BrowserWindow, Menu, ipcMain} = require('electron')
+require('@electron/remote/main').initialize()
 const path = require('path')
 const eggLauncher = require('./electron/lanucher')
 const setup = require('./electron/setup')
@@ -105,12 +106,8 @@ async function createWindow () {
   // short cut
   setShortCut();
 
-  // tray
+  // events
   mainWin.setEvent(MAIN_WINDOW);
-  ipcMain.on('win.toggle-dev-tools', (e, arg) => {
-    console.log(arg)
-    MAIN_WINDOW_VIEWS.get(arg.browerViewId).toggleDevTools()
-  })
 
   // egg server
   await startServer(eggConfig)
