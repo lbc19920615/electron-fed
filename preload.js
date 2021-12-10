@@ -5,8 +5,8 @@ global.EventEmitter = require('events');
 global.__PROLOAD__ = true
 
 const { ipcRenderer } = require('electron')
-const electronRemote = require('electron').remote
-// const remote = require('@electron/remote')
+// const electronRemote = require('electron').remote
+const electronRemote = require('@electron/remote')
 const { callMain } = require('./electron/inject')
 
 global.electronRemote = electronRemote

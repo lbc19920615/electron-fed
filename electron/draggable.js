@@ -20,8 +20,8 @@ module.exports = makeDraggable = function (el) {
 }
 
 function makeDraggableFallback(el) {
-    const electronRemote = require('electron').remote
-    // const electronRemote = require('@electron/remote')
+    // const electronRemote = require('electron').remote
+    const electronRemote = require('@electron/remote')
 
     // 方案一
     // el.style['-webkit-app-region'] = 'drag';

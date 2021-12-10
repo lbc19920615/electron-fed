@@ -45,7 +45,7 @@ import IframeImport from "../../components/iframeImport";
 function electronOpen() {
   return new Promise(resolve => {
     const fs = global.require('fs');
-    const remote = global.require('electron').remote;
+    const remote = global.electronRemote;
     remote.dialog.showOpenDialog({
       properties: [ 'openFile' ],
     })
